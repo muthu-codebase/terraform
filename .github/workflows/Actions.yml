@@ -1,0 +1,31 @@
+name: Archiverepo
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      
+
+env:
+  CURRENT_PR_REPO: "${{ github.repository }}"
+  GIT_TOKEN: "${{ github.token }}"
+  CURRENT_PR_NUMBER: "${{ github.event.pull_request.number }}"
+  
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the repository source code
+      uses: actions/checkout@v2
+    - run: sudo apt-get update -y
+    - run: sudo apt install -y jq
+    - run: jq --version
+    - run: pr_number=${{ github.event.pull_request.number }}
+    - run: echo"$pr_number"
+    - run: chmod +x ./transfer_repo.sh
+    - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.CURRENT_PR_NUMBER }}
+      shell: bash
