@@ -1,12 +1,13 @@
-name: Archiverepo
+name: Archivetherepo
 
 on:
-  push:
+ pull_request:
     branches:
       - main
-  pull_request:
+ push:
     branches:
       - main
+ 
       
 
 env:
