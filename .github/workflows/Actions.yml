@@ -1,15 +1,11 @@
 name: Archivetherepo
 
 on:
- pull_request:
-    branches:
-      - main
  push:
     branches:
       - main
+ pull_request:
  
-      
-
 env:
   CURRENT_PR_REPO: "${{ github.repository }}"
   GIT_TOKEN: "${{ github.token }}"
