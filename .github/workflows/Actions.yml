@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout the repository source code
-      uses: actions/checkout@v2
       if: github.event_name == 'pull_request' && github.event.pull_request.merged == 'true'
+      uses: actions/checkout@v2
     - run: sudo apt-get update -y
     - run: sudo apt install -y jq
     - run: jq --version
